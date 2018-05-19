@@ -32,18 +32,21 @@
 //Code Here
 
 class Employee {
+  makeWidget(){
+    return "" + this.first_name + " " + this.last_name + ' Widget';
+  }
   constructor(first_name, last_name, email, age){
     this.first_name = first_name;
     this.last_name = last_name;
     this.email = email;
     this.age = age;
-  }
-  makeWidget(){
-    return "" + this.first_name + " " + this.last_name + ' Widget';
+  
   }
 }
 
- Employee.makeWidget('Devin', 'Wilcox', 'pzepher@mail.com', 28);
+var devin = new Employee('Devin', 'Wilcox', 'pzepher@mail.com', 28);
+
+ devin.makeWidget();
 
 
 
@@ -65,11 +68,26 @@ class Employee {
 
 //Code Here
 
-class Manager {
-  constructor(){
-    
+class Manager extends Employee{
+  constructor(first_name, ...args){
+    super(first_name, ...args);
+    this.reports = [];
   }
+  hire(employee){
+    this.reports.push(employee)
+  }
+  fire(index){
+    this.reports.splice(index, 1);
+  }
+
 }
+
+var newManager = new Manager('Yulia', 'Wilcox', 'ywilcox@mail.com', 23);
+
+
+// newManager.hire(devin);
+
+// newManager.fire(0);
 
 
 
@@ -98,6 +116,50 @@ class Manager {
 */
 
 //Code Here
+class ProgressiveManager extends Manager{
+  constructor(...args){
+    super(...args);
+    // this.title = "Not a manager";
+    this.bonus = 0;
+  }
+  fire(index){
+    super.fire(index);
+    this.bonus += 100;
+  }
+  // updateTitle() {
+  //   if(this.reports.length === 0){
+  //     this.title = "Not a manager";
+  //   } else if(this.reports.length <= 3){
+  //     this.title = "Barely Manager";
+  //   } else if(this.reports.length <= 10){
+  //     this.title = "Mostly Manager";
+  //   } else if(this.reports.length <= 50){
+  //     this.title = "Manager";
+  //   } else if(this.reports.length <= 100){
+  //     this.title = "Manager Plus";
+  //   } else {
+  //     this.title = "Bestest Manager";
+  //   }
+  // }
+  get title() {
+    if (this.reports.length === 0){
+      return "Not a manager";
+    } else if(this.reports.length <= 3){
+      return "Barely Manager";
+    } else if(this.reports.length <= 10){
+      return "Mostly Manager";
+    } else if(this.reports.length <= 50){
+      return "Manager";
+    } else if(this.reports.length <= 100){
+      return "Manager Plus";
+    } else {
+      return "Bestest Manager";
+    }
+  }
+  // set title(O_o) {}
+}
+
+// var progressiveYulia = new ProgressiveManager()
 
 
 
