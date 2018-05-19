@@ -82,9 +82,8 @@ function totalPopulation(obj){
 
 function ingredients(obj){
   var { carb, fat, protein } = obj;
-  // ({ carb: 'carb', fat: 'fat', protein:'protein' } = { carb, fat, protein });
   var arr = [];
-  arr.push(obj);
+  arr.push(carb, fat, protein)
   return arr;
 }
 
